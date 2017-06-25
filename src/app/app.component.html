@@ -5,7 +5,7 @@
       <button (click)="moveKnight()">Move Knight</button>
       <div class="flex-container" *ngFor="let row of tiles">
         <div class="flex-item" *ngFor="let tile of row"
-             [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile)}">
+               [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile), 'knight-present':knightIsHere(tile), 'is-next':tile.isNext}">
           {{tile.x}}{{tile.y}}
           <div *ngIf="knightIsHere(tile)">
             Knight

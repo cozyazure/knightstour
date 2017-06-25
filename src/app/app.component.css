@@ -31,9 +31,18 @@
 }
 
 .next-possible {
-  background: blue;
+  background: #336fff;
+}
+
+.is-next{
+  background: greenyellow;
 }
 
 .visited {
   background: gray;
+}
+
+.knight-present {
+  background: gold;
+  color: black;
 }

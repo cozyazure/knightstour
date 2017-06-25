@@ -30,8 +30,10 @@ export class AppComponent {
     };
 
     this.tiles[this.knightCurrentPos.x][this.knightCurrentPos.y].isVisited = true;
-    this.getPossibleMovesOfKnight();
-    // this.moveKnight();
+    const firstPossible = this.getPossibleMovesOfKnight().reduce((prev, curr) => {
+      return prev.nextPossibleMoves < curr.nextPossibleMoves ? prev : curr;
+    });
+    firstPossible.isNext = true;
   }
 
   knightIsHere(tile: Tile) {
@@ -63,10 +65,7 @@ export class AppComponent {
 
 
   getPossibleMovesOfKnight() {
-    this.tiles.forEach(x => x.forEach(y => {
-      y.isNextPossible = false;
-      y.nextPossibleMoves = 0;
-    }))
+    this.resetTiles();
     const possibleTileList = [];
     for (let x = -2; x < 3; x++) {
       for (let y = -2; y < 3; y++) {
@@ -87,11 +86,22 @@ export class AppComponent {
   }
 
   moveKnight() {
+
     const possibleMoves = this.getPossibleMovesOfKnight().reduce((prev, curr) => {
       return prev.nextPossibleMoves < curr.nextPossibleMoves ? prev : curr;
     });
     this.setKnightPosition(possibleMoves.x, possibleMoves.y);
+    const nextMove = this.getPossibleMovesOfKnight().reduce((prev, curr) => {
+      return prev.nextPossibleMoves < curr.nextPossibleMoves ? prev : curr;
+    });
+    nextMove.isNext = true;
+  }
 
+  resetTiles() {
+    this.tiles.forEach(x => x.forEach(y => {
+      y.isNextPossible = false;
+      y.nextPossibleMoves = 0;
+    }));
   }
 
   setKnightPosition(x, y) {
@@ -113,6 +123,7 @@ export class Tile {
   public isVisited: boolean;
   public isNextPossible: boolean;
   public nextPossibleMoves: number;
+  public isNext: boolean;
 
   constructor(x, y) {
     this.x = x;
