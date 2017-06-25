@@ -2,11 +2,16 @@
   <div class="row">
     <div class="twelve columns">
       <h3>The Knight's Tour</h3>
+      <button (click)="moveKnight()">Move Knight</button>
       <div class="flex-container" *ngFor="let row of tiles">
-        <div class="flex-item" *ngFor="let tile of row">
+        <div class="flex-item" *ngFor="let tile of row"
+             [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile)}">
           {{tile.x}}{{tile.y}}
           <div *ngIf="knightIsHere(tile)">
             Knight
+          </div>
+          <div *ngIf="tile.nextPossibleMoves">
+            {{tile.nextPossibleMoves}}
           </div>
         </div>
       </div>
