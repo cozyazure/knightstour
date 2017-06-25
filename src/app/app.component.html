@@ -1,3 +1,15 @@
-<h1>
-  The Knight's Tour
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="twelve columns">
+      <h3>The Knight's Tour</h3>
+      <div class="flex-container" *ngFor="let row of tiles">
+        <div class="flex-item" *ngFor="let tile of row">
+          {{tile.x}}{{tile.y}}
+          <div *ngIf="knightIsHere(tile)">
+            Knight
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
