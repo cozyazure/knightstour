@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import 'rxjs/observable/interval';
-import {Observable} from 'rxjs/Rx';
+import {Observable, Subscription} from 'rxjs/Rx';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,11 +11,15 @@ export class AppComponent {
   public tiles = [];
   public knightCurrentPos: { x, y };
 
+  public automate$: Observable<any>;
+  public automateSubscription: Subscription;
 
   constructor() {
-
     this.resetTour();
-
+    this.automate$ = Observable
+      .interval(500)
+      .timeInterval()
+      .take(64);
   }
 
   knightIsHere(tile: Tile) {
@@ -96,15 +100,13 @@ export class AppComponent {
   }
 
   automateMoveKnight() {
-    const source = Observable
-      .interval(500)
-      .timeInterval()
-      .take(64);
-
-    source.subscribe(() => this.moveKnight());
+    this.automateSubscription = this.automate$.subscribe(() => this.moveKnight());
   }
 
   resetTour() {
+    if (this.automateSubscription) {
+      this.automateSubscription.unsubscribe();
+    }
     // initialize the array
     this.tiles = [];
     for (let i = 0; i < 8; i++) {
