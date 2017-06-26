@@ -1,6 +1,5 @@
 .flex-container {
   padding: 0;
-  margin: 0;
   list-style: none;
   display: -webkit-box;
   display: -moz-box;
@@ -26,7 +25,7 @@
 .flex-item:before {
   content: "";
   display: block;
-  padding-top: 90%;
+  padding-top: 100%;
   float: left;
 }
 

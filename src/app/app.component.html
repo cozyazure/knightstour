@@ -3,6 +3,8 @@
     <div class="twelve columns">
       <h3>The Knight's Tour</h3>
       <button (click)="moveKnight()">Move Knight</button>
+      <button (click)="automateMoveKnight()">Automate</button>
+      <button (click)="resetTour()">Restart</button>
       <div class="flex-container" *ngFor="let row of tiles">
         <div class="flex-item" *ngFor="let tile of row"
                [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile), 'knight-present':knightIsHere(tile), 'is-next':tile.isNext}">

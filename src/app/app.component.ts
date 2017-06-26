@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-
+import 'rxjs/observable/interval';
+import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,27 +14,8 @@ export class AppComponent {
 
   constructor() {
 
+    this.resetTour();
 
-    // initialize the array
-    for (let i = 0; i < 8; i++) {
-      const temp = [];
-      for (let j = 0; j < 8; j++) {
-        const tile = new Tile(i, j);
-        temp.push(tile);
-      }
-      this.tiles.push(temp);
-    }
-
-    // initalize knight Position
-    this.knightCurrentPos = {
-      x: 0, y: 0
-    };
-
-    this.tiles[this.knightCurrentPos.x][this.knightCurrentPos.y].isVisited = true;
-    const firstPossible = this.getPossibleMovesOfKnight().reduce((prev, curr) => {
-      return prev.nextPossibleMoves < curr.nextPossibleMoves ? prev : curr;
-    });
-    firstPossible.isNext = true;
   }
 
   knightIsHere(tile: Tile) {
@@ -113,7 +95,39 @@ export class AppComponent {
     this.tiles[x][y].isVisited = true;
   }
 
+  automateMoveKnight() {
+    const source = Observable
+      .interval(500)
+      .timeInterval()
+      .take(64);
 
+    source.subscribe(() => this.moveKnight());
+  }
+
+  resetTour() {
+    // initialize the array
+    this.tiles = [];
+    for (let i = 0; i < 8; i++) {
+      const temp = [];
+      for (let j = 0; j < 8; j++) {
+        const tile = new Tile(i, j);
+        temp.push(tile);
+      }
+      this.tiles.push(temp);
+    }
+
+    // initalize knight Position
+    this.knightCurrentPos = {
+      x: 0, y: 0
+    };
+
+    this.tiles[this.knightCurrentPos.x][this.knightCurrentPos.y].isVisited = true;
+
+    const firstPossible = this.getPossibleMovesOfKnight().reduce((prev, curr) => {
+      return prev.nextPossibleMoves < curr.nextPossibleMoves ? prev : curr;
+    });
+    firstPossible.isNext = true;
+  }
 }
 
 
