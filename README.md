@@ -1,6 +1,6 @@
 # KnightsTour
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.
+This is a small web app to illustrate the [Knight's Tour Problem](https://en.wikipedia.org/wiki/Knight%27s_tour).
 
 ## Development server
 
