@@ -1,13 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="twelve columns">
+    <div class="ten columns">
       <h3>The Knight's Tour</h3>
       <button (click)="moveKnight()">Move Knight</button>
       <button (click)="automateMoveKnight()">Automate</button>
       <button (click)="resetTour()">Restart</button>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="nine columns">
       <div class="flex-container" *ngFor="let row of tiles">
         <div class="flex-item" *ngFor="let tile of row"
-               [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile), 'knight-present':knightIsHere(tile), 'is-next':tile.isNext}">
+             [ngClass]="{'next-possible': tile.isNextPossible ,'visited': tile.isVisited && !knightIsHere(tile), 'knight-present':knightIsHere(tile), 'is-next':tile.isNext}">
           {{tile.x}}{{tile.y}}
           <div *ngIf="knightIsHere(tile)">
             Knight
@@ -17,6 +22,18 @@
           </div>
         </div>
       </div>
+
+    </div>
+    <div class="three columns">
+      Legend
+      <ul class="legend">
+        <li><span class="knight-present"></span>Knight's Position</li>
+        <li><span class="not-visited"></span>Unvisited</li>
+        <li><span class="next-possible"></span>Knight's next possible moves</li>
+        <li><span class="is-next"></span>Knight's next possibe moves with least options</li>
+        <li><span class="visited"></span>Visited</li>
+
+      </ul>
     </div>
   </div>
 </div>

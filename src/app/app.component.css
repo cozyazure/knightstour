@@ -16,7 +16,6 @@
   margin: 5px;
   color: white;
   font-weight: bold;
-  font-size: 1.5em;
   text-align: center;
   flex: 1 0 0px;
   min-width: 1.5em;
@@ -25,7 +24,7 @@
 .flex-item:before {
   content: "";
   display: block;
-  padding-top: 100%;
+  padding-top:100%;
   float: left;
 }
 
@@ -41,7 +40,16 @@
   background: gray;
 }
 
+.not-visited{
+  background: tomato;
+}
+
 .knight-present {
   background: gold;
   color: black;
 }
+
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: 1px solid #ccc; float: left; width: 20px; height: 20px; margin: 2px; }
+
